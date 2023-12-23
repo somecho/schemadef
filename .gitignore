@@ -1,0 +1,6 @@
+.nrepl-port
+.calva
+.clj-kondo
+.cpcache
+.lsp
+*.json
