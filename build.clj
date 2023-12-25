@@ -46,6 +46,7 @@
                       :url url
                       :tag (b/git-process {:git-args "rev-parse HEAD"})}
                 :src-dirs ["src"]
+                :resource-dirs ["resources"]
                 :pom-data [[:licenses
                             [:license
                              [:name "Eclipse Public License 2.0"]
