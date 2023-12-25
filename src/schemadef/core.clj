@@ -37,5 +37,5 @@
            :type :string}]
    :runs dispatch-gen-default})
 
-(defn -main [& args]
+(defn ^:no-doc -main [& args]
   (run-cmd args CONFIGURATION))
