@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [clojure.data.json :as json]
             [cli-matic.core :refer [run-cmd]]
-            [schemadef.lib :refer [gen-default]]))
+            [schemadef.lib :refer [gen-default]]
+            [clojure.java.io :as io]))
 
 (defn- dispatch-gen-default [{:keys [input output schema]}]
   (cond (and input schema)
@@ -21,7 +22,7 @@
 (def ^:private CONFIGURATION
   {:command "schemadef"
    :description "Generate defaults from JSON schema"
-   :version (slurp "VERSION")
+   :version (slurp (io/resource "VERSION"))
    :opts [{:as "Path to JSON schema"
            :option "input"
            :short "i"
