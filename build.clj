@@ -10,7 +10,7 @@
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
 (def url (str "https://github.com/somecho/" project-name))
-(def connection (str "scm:git:" url ".git"))
+(def connection (str "scm:git:" url))
 
 (defn clean [_]
   (b/delete {:path "target"}))
