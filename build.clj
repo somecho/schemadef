@@ -6,7 +6,7 @@
 
 (def project-name "schemadef")
 (def lib (symbol (str "org.clojars.some/" project-name)))
-(def version (str (slurp "resources/VERSION") "." (b/git-count-revs {:dir "."})))
+(def version (slurp "resources/VERSION"))
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
