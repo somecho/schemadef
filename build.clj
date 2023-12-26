@@ -3,9 +3,10 @@
             [clojure.java.shell :refer [sh]]
             [deps-deploy.deps-deploy :as dd]))
 
+
 (def project-name "schemadef")
 (def lib (symbol (str "org.clojars.some/" project-name)))
-(def version (slurp "resources/VERSION"))
+(def version (str (slurp "resources/VERSION") "." (b/git-count-revs {:dir "."})))
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))
@@ -17,10 +18,10 @@
 
 (defn uberjar [_]
   (clean nil)
-  (b/copy-dir {:src-dirs ["src"]
+  (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
   (b/compile-clj {:basis basis
-                  :src-dirs ["src"]
+                  :src-dirs ["src" "resources"]
                   :class-dir class-dir})
   (b/uber {:class-dir class-dir
            :uber-file jar-file

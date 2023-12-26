@@ -1,5 +1,6 @@
 (ns schemadef.lib
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.data.json :as json]))
 
 (defn- find-refs [schema]
   (-> schema
@@ -43,15 +44,17 @@
       (recur (fill-refs schema parent))
       schema)))
 
-(defn gen-default 
-"Generates default object from schema object.
+(defn gen-default
+  "Generates default object from schema object.
 
 **Inputs**
-- `schema` - JSON schema parsed as Clojure EDN 
+- `schema` - JSON schema as a string
  "
   [schema]
-  (apply merge (map (fn [entry]
-                      (if (= "object" (get (val entry) "type"))
-                        {(key entry) (gen-default (val entry))}
-                        {(key entry) (get (val entry) "default")}))
-                    (get (fill-refs-r schema schema) "properties"))))
+  (let [s (if (map? schema) schema (json/read-str schema))]
+    (apply merge
+           (map (fn [entry]
+                  (if (= "object" (get (val entry) "type"))
+                    {(key entry) (gen-default (val entry))}
+                    {(key entry) (get (val entry) "default")}))
+                (get (fill-refs-r s s) "properties")))))

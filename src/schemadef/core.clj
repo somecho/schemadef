@@ -3,7 +3,11 @@
   (:require [clojure.data.json :as json]
             [cli-matic.core :refer [run-cmd]]
             [schemadef.lib :refer [gen-default]]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [clojure.string :as str]
+            [clojure.java.shell :refer [sh]]))
+
+(def ^:private commits (str/trim (:out (sh "git" "rev-list" "HEAD" "--count"))))
 
 (defn- dispatch-gen-default [{:keys [input output schema]}]
   (cond (and input schema)
@@ -11,9 +15,7 @@
         (and (nil? input) (nil? schema))
         (println "No input given. Please use either input -i or schema -s flag.")
         :else
-        (let [s (if input
-                  (-> input json/read-str)
-                  (-> schema json/read-str))
+        (let [s (if input input schema)
               f (json/write-str (gen-default s))]
           (if output
             (spit output f)
@@ -22,7 +24,7 @@
 (def ^:private CONFIGURATION
   {:command "schemadef"
    :description "Generate defaults from JSON schema"
-   :version (slurp (io/resource "VERSION"))
+   :version (str (slurp (io/resource "VERSION")) "." commits)
    :opts [{:as "Path to JSON schema"
            :option "input"
            :short "i"
