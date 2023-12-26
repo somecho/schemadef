@@ -1,6 +1,8 @@
 # Schemadef
-Generate defaults from JSON schema. Supports
-- `$defs`
+[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.some/schemadef.svg)](https://clojars.org/org.clojars.some/schemadef)
+
+Simple CLI to generate defaults from JSON schema. Supports `$defs`. _Does not_ support
+recursive `$refs` and JSON pointer URIs. Can also be used as a Clojure/script library.
 
 
 ## CLI Usage 
@@ -13,7 +15,7 @@ USAGE:
   schemadef [command options] [arguments...]
 
 VERSION:
- 0.1.3
+ x.x.x
 
 OPTIONS:
    -i, --input f   Path to JSON schema
@@ -75,9 +77,31 @@ When `schemadef -i schema.json` is run, this gets printed to STDOUT:
 
 You can use `schemadef -i schema.json -o default.json` to have the output be saved in a file.
 
-## Building from source
+## Installation
+Prebuilt binary coming soon.
+
+### Building from source
 You will need to have the following dependencies on your system:
 - Graal 21
 - Clojure
 
 Next, create the uberjar with `clojure -T:build uberjar`. Then create the native image with `clojure -T:build native-image`. The binary `schemadef` will be in the `/target` folder.
+
+## Use as a lib
+
+Schemadef can also be used as a library. 
+
+### deps.edn
+```
+org.clojars.some/schemadef {:mvn/version "0.2.20"}
+```
+### Leiningen
+```
+[org.clojars.some/schemadef "0.2.20"]
+```
+
+### Example
+```clj
+(require '[schemadef.lib :refer [gen-default]])
+(gen-default (slurp "schema.json"))
+```
