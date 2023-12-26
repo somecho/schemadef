@@ -1,6 +1,6 @@
 (ns schemadef.lib
   (:require [clojure.string :as str]
-            [clojure.data.json :as json]))
+            #?(:clj [clojure.data.json :as json])))
 
 (defn- find-refs [schema]
   (-> schema
