@@ -51,7 +51,10 @@
 - `schema` - JSON schema as a string
  "
   [schema]
-  (let [s (if (map? schema) schema (json/read-str schema))]
+  (let [s (if (map? schema)
+            schema
+            #?(:clj (json/read-str schema)
+               :cljs (.parse js/JSON schema)))]
     (apply merge
            (map (fn [entry]
                   (if (= "object" (get (val entry) "type"))
