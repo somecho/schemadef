@@ -6,7 +6,7 @@ recursive `$refs` and JSON pointer URIs. Can also be used as a Clojure/script li
 
 ## Installation
 Schemadef currently only has prebuilt binaries for Linux x86-64 platforms. However, building from source is relatively trivial. See [building from source](#building-from-source).
-To install, simply copy and paste this into your command line. You will need `sudo` because the script will copy the binary to `/usr/local/bin`.
+To install, simply copy and paste this into your command line. You will need `sudo` because the script will copy the binary to `/usr/local/bin`. The script does not change or add any environment variables, neither does the binary create configuration files.
 ```sh
 sudo bash < <(curl -s https://raw.githubusercontent.com/somecho/schemadef/main/install.sh)
 ```
