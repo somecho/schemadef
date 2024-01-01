@@ -29,7 +29,7 @@ USAGE:
   schemadef [command options] [arguments...]
 
 VERSION:
- x.x.x
+ 0.2.26
 
 OPTIONS:
    -i, --input f   Path to JSON schema
@@ -97,11 +97,11 @@ Schemadef can also be used as a library.
 
 ### deps.edn
 ```
-org.clojars.some/schemadef {:mvn/version "0.2.20"}
+org.clojars.some/schemadef {:mvn/version "0.2.26"}
 ```
 ### Leiningen
 ```
-[org.clojars.some/schemadef "0.2.20"]
+[org.clojars.some/schemadef "0.2.26"]
 ```
 
 ### Example
