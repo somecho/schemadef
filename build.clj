@@ -1,12 +1,12 @@
 (ns build
   (:require [clojure.tools.build.api :as b]
             [clojure.java.shell :refer [sh]]
+            [clojure.string :as str]
             [deps-deploy.deps-deploy :as dd]))
-
 
 (def project-name "schemadef")
 (def lib (symbol (str "org.clojars.some/" project-name)))
-(def version (slurp "resources/VERSION"))
+(def version (str/trim (slurp "resources/VERSION")))
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 (def class-dir "target/classes")
 (def basis (b/create-basis {:project "deps.edn"}))

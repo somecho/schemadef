@@ -5,3 +5,4 @@
 .lsp
 *.json
 target/
+.env
