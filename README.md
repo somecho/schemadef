@@ -4,6 +4,20 @@
 Simple CLI to generate defaults from JSON schema. Supports `$defs`. _Does not_ support
 recursive `$refs` and JSON pointer URIs. Can also be used as a Clojure/script library.
 
+## Installation
+Schemadef currently only has prebuilt binaries for Linux x86-64 platforms. However, building from source is relatively trivial. See [building from source](#building-from-source).
+To install, simply copy and paste this into your command line. You will need `sudo` because the script will copy the binary to `/usr/local/bin`.
+```sh
+sudo bash < <(curl -s https://raw.githubusercontent.com/somecho/schemadef/main/install.sh)
+```
+To verify your installation, you can call `schemadef --help` and it should show you the man page. To uninstall, simply remove the binary with `sudo rm /usr/local/bin/schemadef`. 
+
+### Building from source
+You will need to have the following dependencies on your system:
+- [Graal 21](https://www.graalvm.org/latest/docs/getting-started/)
+- [Clojure](https://clojure.org/guides/install_clojure)
+
+Next, create the uberjar with `clojure -T:build uberjar`. Then create the native image with `clojure -T:build native-image`. The binary `schemadef` will be in the `/target` folder.
 
 ## CLI Usage 
 Here's the manpage:
@@ -76,16 +90,6 @@ When `schemadef -i schema.json` is run, this gets printed to STDOUT:
 ```
 
 You can use `schemadef -i schema.json -o default.json` to have the output be saved in a file.
-
-## Installation
-Prebuilt binary coming soon.
-
-### Building from source
-You will need to have the following dependencies on your system:
-- Graal 21
-- Clojure
-
-Next, create the uberjar with `clojure -T:build uberjar`. Then create the native image with `clojure -T:build native-image`. The binary `schemadef` will be in the `/target` folder.
 
 ## Use as a lib
 
