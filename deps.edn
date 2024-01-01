@@ -5,4 +5,6 @@
  :aliases
  {:build {:extra-deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
                        slipset/deps-deploy {:mvn/version "RELEASE"}}
-          :ns-default build}}}
+          :ns-default build}
+  :test {:main-opts ["-m" "kaocha.runner"]
+         :extra-deps {lambdaisland/kaocha {:mvn/version "1.87.1366"}}}}}
